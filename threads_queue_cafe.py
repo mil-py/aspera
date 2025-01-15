@@ -17,7 +17,7 @@ class Guest(threading.Thread):
         self.name = name
 
     def run(self):
-        time.sleep(randint(3, 9))
+        time.sleep(randint(5, 12))
         print(f'{self.name} поел(-а)')
 
 
@@ -39,7 +39,7 @@ class Cafe:
     def guest_arrival(self, guest):
 
         self.q.put(guest)
-        print(f"{guest.name} в очереди. (перед ним {self.q.qsize()-1} человек.)")
+        print(f"{guest.name} в очереди. Перед ним {self.q.qsize()-1} человек.")
 
 
     def serve_guests(self):
@@ -80,7 +80,7 @@ def arrival(cafe):
     while cafe.is_open:
         i+=1
         j=(j+1)%len(guests_names)
-        time.sleep(randint(1,4))
+        time.sleep(randint(1,2))
         # Создание гостей
         guest = Guest(guests_names[j]+'_'+str(i))
 
