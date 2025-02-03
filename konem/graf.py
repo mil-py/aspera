@@ -40,7 +40,7 @@ def paths(gr):
         if paths == new_paths:
             break# если ничего не меняется - выход
         else:
-            paths = new_paths.copy()
+            paths = new_paths
 
 
     return paths

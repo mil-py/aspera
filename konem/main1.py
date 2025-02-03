@@ -3,19 +3,6 @@ from graf import paths
 
 
 
-def konem(self, pin):
-    return [
-        (pin[0]  - 1, pin[1]+2),
-        (pin[0] - 1, pin[1] - 2),
-        (pin[0] + 1, pin[1] + 2),
-        (pin[0] + 1, pin[1] - 2),
-        (pin[0] - 2, pin[1] + 1),
-        (pin[0] - 2, pin[1] - 1),
-        (pin[0] + 2, pin[1] + 1),
-        (pin[0] + 2, pin[1] - 1),
-            ]
-
-
 
 
 class Matr:
@@ -35,7 +22,7 @@ class Matr:
     def set_cell(self,r,c,val):
         self.matr[r][c] = val
 
-    def is_in_matr(self, col, row):
+    def is_in_matr(self, row,col ):
         return row in range(self.rows) and col in range(self.cols)
 
     def get_all_paths(self):
