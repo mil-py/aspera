@@ -1,8 +1,6 @@
 from pprint import pprint
 
-''' табло номеронабирателя. 
-    Задача - обойти конем, 
-    найти маршрут с максимальным числом ходов '''
+
 
 #граф -{ вершина:[связанные вершины]}
 gr = {
@@ -25,8 +23,9 @@ def paths(gr):
     for node in gr:#добавляем стартовые точки
         if gr[node]: #исключаем несвязанные вершины
             paths.append([node])
-
+    count = 0
     while True:
+        old_count = count
         new_paths=[]
         for path in paths:
             last = path[-1]#последняя вершина в пути
@@ -35,9 +34,10 @@ def paths(gr):
                 if not node in path:#добавляем вершину если такой не было в данном пути
                     new_paths.append(path + [node])
                     path_closed = False
+                    count +=1
             if path_closed:# если ничего не добавилось, оставляем старый путь
                 new_paths.append(path)
-        if paths == new_paths:
+        if old_count == count:
             break# если ничего не меняется - выход
         else:
             paths = new_paths

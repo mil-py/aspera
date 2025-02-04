@@ -1,23 +1,16 @@
 import time
 from pprint import pprint
-from turtledemo.penrose import start
-
 from graf import paths
+
+
+''' табло номеронабирателя. 
+    Задача - обойти конем, 
+    найти маршрут с максимальным числом ходов '''
+
 
 class Matr2Graph:
     def __init__(self, matr):
-        self.tablo = {
-            (0, 0): "1",
-            (0, 1): "2",
-            (0, 2): "3",
-            (1, 0): "4",
-            (1, 1): "5",
-            (1, 2): "6",
-            (2, 0): "7",
-            (2, 1): "8",
-            (2, 2): "9",
-            (3, 1): "0"
-        }
+
         self.rows = len(matr)
         self.cols = max([len(arr) for arr in matr])
         self.matr = matr
