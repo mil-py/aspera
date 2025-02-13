@@ -1,6 +1,7 @@
 import time
 from pprint import pprint
-from graf import paths
+from graph_path_gen import long_paths
+
 
 
 ''' табло номеронабирателя. 
@@ -16,7 +17,7 @@ class Matr2Graph:
         self.matr = matr
 
     def hody(self, node):# returns possible cords horse jump
-        return [
+        return (
             (node[0] - 1, node[1] + 2),
             (node[0] - 1, node[1] - 2),
             (node[0] + 1, node[1] + 2),
@@ -25,9 +26,9 @@ class Matr2Graph:
             (node[0] - 2, node[1] - 1),
             (node[0] + 2, node[1] + 1),
             (node[0] + 2, node[1] - 1),
-                ]
+        )
 
-    def create_graph(self):
+    def set_edges(self):
         gr = {}
         for r in range(self.rows):
             for c in range(self.cols):
@@ -43,7 +44,7 @@ class Matr2Graph:
 
 class Matr:
     def __init__(self,cols,rows):
-        i = 1
+
         self.cols = cols
         self.rows = rows
         self.matr =[]
@@ -62,14 +63,17 @@ class Matr:
 
 if __name__ == "__main__":
     matr = Matr(5,5)
-    # matr.set_cell(3,0, None)
-    # matr.set_cell(3,2, None)
-    # matr.set_cell(3,1, '0')
+
     graph = Matr2Graph(matr.matr)
     start = time.time()
-    paths = paths(graph.create_graph())
-    # pprint(paths)
+    gr = graph.set_edges()
+    # pprint(gr)
+    paths = long_paths(gr)
+
     end = time.time()
     print('num of paths =', len(paths))
     print('max path len = ', max([len(path) for path in paths]))
     print('time elapsed ',end - start)
+    # with open('gr.txt','w', encoding="utf-8") as f:
+    #     for p in paths:
+    #         f.write(str(p)+'\n')

@@ -17,35 +17,41 @@ gr = {
 }
 
 #найти все пути
-def paths(gr):
+def long_paths(gr):
     paths=[]
+    ii=0
 
     for node in gr:#добавляем стартовые точки
         if gr[node]: #исключаем несвязанные вершины
             paths.append([node])
     count = 0
+    # with open("gr.txt", 'w', encoding='UTF-8') as f:
     while True:
         old_count = count
-        new_paths=[]
-        for path in paths:
-            last = path[-1]#последняя вершина в пути
+        # new_paths = []
+        for i,path in enumerate(paths):
+            if not path:
+                continue
+            last = path[-1]  # последняя вершина в пути
             path_closed = True
             for node in gr[last]:
-                if not node in path:#добавляем вершину если такой не было в данном пути
-                    new_paths.append(path + [node])
+                if not node in path:  # добавляем вершину если такой не было в данном пути
+                    paths.append(path + [node])
                     path_closed = False
-                    count +=1
-            if path_closed:# если ничего не добавилось, оставляем старый путь
-                new_paths.append(path)
+                    count += 1
+            if not path_closed:  # если что-то добавилось, удаляем старый путь
+                paths[i] = ''
+                #f.write(str(path) + '\n')
+                ii = i
         if old_count == count:
-            break# если ничего не меняется - выход
-        else:
-            paths = new_paths
-
+            break  # если ничего не меняется - выход
+        # else:
+        #     paths = new_paths
+        paths = paths[ii:]
 
     return paths
 
 if __name__ == '__main__':
-    pprint(sorted(paths(gr)))
-    print('paths len =', len(paths(gr)))
-    print('max path len = ',max([len(path) for path in paths(gr)]))
+    pprint(sorted(long_paths(gr)))
+    print('paths len =', len(long_paths(gr)))
+    print('max path len = ',max([len(path) for path in long_paths(gr)]))
